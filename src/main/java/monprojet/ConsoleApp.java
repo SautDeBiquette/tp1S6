@@ -17,6 +17,8 @@ import monprojet.entity.*;
 public class ConsoleApp implements CommandLineRunner {
     @Autowired // Auto-initialisé par Spring
     private CountryRepository countryDAO;
+    @Autowired
+    private CityRepository cityDAO;
 
     @Override
     /*
@@ -41,6 +43,14 @@ public class ConsoleApp implements CommandLineRunner {
 
         tapezEnterPourContinuer();
 
+        log.info("On ajoute un nouvel enregistrement");
+        City Madrid = new City("Madrid", espagne);
+        log.info("Avant d'enregistrer, pas de cle : {}", Madrid);
+        cityDAO.save(Madrid);
+        log.info("Après l'enregistrement, la cle a été générée : {}", espagne);
+
+        tapezEnterPourContinuer();
+
         log.info("Recherche par cle");
         Optional<Country> oc = countryDAO.findById(2);
         oc.ifPresent(
@@ -49,14 +59,14 @@ public class ConsoleApp implements CommandLineRunner {
 
         tapezEnterPourContinuer();
 
-        log.info("Suppression par cle");
-        log.info("Avant la suppression il y a {} enregistrements", countryDAO.count());
-        try {
-            countryDAO.deleteById(2);
-            log.info("Apres la suppression il reste {} enregistrements", countryDAO.count());
-        } catch (DataIntegrityViolationException e) {
-            log.info("Impossible de supprimer ce pays, il reste toujours {} enregistrements", countryDAO.count());
-        }
+//        log.info("Suppression par cle");
+//        log.info("Avant la suppression il y a {} enregistrements", countryDAO.count());
+//        try {
+//            countryDAO.deleteById(2);
+//            log.info("Apres la suppression il reste {} enregistrements", countryDAO.count());
+//        } catch (DataIntegrityViolationException e) {
+//            log.info("Impossible de supprimer ce pays, il reste toujours {} enregistrements", countryDAO.count());
+//        }
    }
 
     public static void tapezEnterPourContinuer() throws Exception {

@@ -9,3 +9,9 @@ INSERT INTO Country(id, code, name) VALUES
 -- Attention : la syntaxe est différente selon le SGBD utilisé
 -- ALTER TABLE Country ALTER COLUMN id RESTART WITH 4;
 
+INSERT INTO City(id, name, population, country_id) VALUES
+-- Les clés sont auto-générées, donc on ne les spécifie pas
+(default, 'Paris', 15,1), -- id = 1
+(default, 'Londres', 2,2), -- id = 2
+(default, 'Washington', 26,3); -- id = 4
+
